@@ -43,4 +43,13 @@ export const notesSlice = createSlice({
     },
 });
 
+export const {
+    selectAll: selectAllNotes,
+    selectById: selectNoteById,
+    selectIds: selectNoteIds,
+} = notesAdapter.getSelectors((state) => state.notes);
+
+export const selectNoteStatus = (state) => state.notes.status;
+export const selectNoteError = (state) => state.notes.error;
+
 export default notesSlice.reducer;
