@@ -23,6 +23,16 @@ export const fetchNotes = createAsyncThunk(
     }
 );
 
+export const editNote = createAsyncThunk(
+    "notes/editNote",
+    async ({ collectionName, noteId, update }) => {
+        const { data } = await server.patch(`/notes/${noteId}`, update, {
+            params: { collectionName },
+        });
+        return data;
+    }
+);
+
 export const notesSlice = createSlice({
     name: "notes",
     initialState,
@@ -39,6 +49,9 @@ export const notesSlice = createSlice({
             .addCase(fetchNotes.rejected, (state, action) => {
                 state.status = "rejected";
                 state.error = action.error.message;
+            })
+            .addCase(editNote.fulfilled, (state, action) => {
+                notesAdapter.setOne(state, action.payload);
             });
     },
 });
