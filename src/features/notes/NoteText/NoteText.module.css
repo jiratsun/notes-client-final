@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 0.4rem;
+}
+
+.text {
+    font-size: 1em;
+}
+
+.icon {
+    font-size: 0.8em;
+}
