@@ -19,7 +19,9 @@ const NoteText = ({ text }) => {
         <div
             className={`fs-400 ${noteTextStyles.container}`}
             onClick={() => onClick(setCopy, text)}>
-            <p className="text" style={{ color: theme.neutral100 }}>
+            <p
+                className={noteTextStyles.text}
+                style={{ color: theme.neutral100 }}>
                 {text}
             </p>
             <i
