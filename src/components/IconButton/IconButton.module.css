@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.btn:hover {
+    opacity: 0.65;
+}
+
 .icon {
     font-size: 0.75em;
 }
