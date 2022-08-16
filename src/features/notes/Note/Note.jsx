@@ -10,6 +10,7 @@ import NoteEditButtons from "../NoteEditButtons";
 import { selectNoteById } from "../notesSlice";
 import noteStyles from "./Note.module.css";
 import useTheme from "../../themes/useTheme";
+import VerticalDivider from "../../../components/VerticalDivider";
 
 const reducer = (state, { type, payload }) => {
     switch (type) {
@@ -54,6 +55,7 @@ const Note = ({ noteId }) => {
     return (
         <div className={noteStyles.container}>
             <NoteFavoriteButton isFavorite={note.isFavorite} noteId={note.id} />
+            <VerticalDivider />
             {state.isEditing ? (
                 <TextInput
                     value={state.updatedTitle}
@@ -65,6 +67,7 @@ const Note = ({ noteId }) => {
             ) : (
                 <NoteText text={note.title} />
             )}
+            <VerticalDivider />
             {state.isEditing ? (
                 <TextInput
                     value={state.updatedComment}
@@ -76,6 +79,7 @@ const Note = ({ noteId }) => {
             ) : (
                 <NoteText text={note.comment} />
             )}
+            <VerticalDivider />
             {state.isEditing ? (
                 <NoteEditButtons
                     noteId={noteId}
