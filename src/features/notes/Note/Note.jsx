@@ -40,6 +40,8 @@ const reducer = (state, { type, payload }) => {
             return { ...state, updatedTitle: payload };
         case "comment":
             return { ...state, updatedComment: payload };
+        default:
+            return state;
     }
 };
 
