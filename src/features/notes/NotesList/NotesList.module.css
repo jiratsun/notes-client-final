@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: 150px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
