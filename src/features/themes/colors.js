@@ -23,6 +23,7 @@ const colors = {
         neutral10: lightNeutral + "1A",
         neutral5: lightNeutral + "0D",
         scroll: "#E1E0DE",
+        spinner: "#F5F5F4",
     },
     dark: {
         neutral100: darkNeutral,
@@ -32,6 +33,7 @@ const colors = {
         neutral10: darkNeutral + "1A",
         neutral5: darkNeutral + "0D",
         scroll: "#555246",
+        spinner: "#413D30",
     },
 };
 
