@@ -6,7 +6,9 @@ import NoteFavoriteButton from "../NoteFavoriteButton";
 import NoteText from "../NoteText";
 import NoteButtons from "../NoteButtons";
 import NoteEditButtons from "../NoteEditButtons";
+import Divider from "../../../components/Divider";
 
+import colors from "../../themes/colors";
 import { selectNoteById } from "../notesSlice";
 import noteStyles from "./Note.module.css";
 import useTheme from "../../themes/useTheme";
@@ -45,7 +47,7 @@ const reducer = (state, { type, payload }) => {
     }
 };
 
-const Note = ({ noteId }) => {
+const Note = ({ noteId, isUncertain }) => {
     const note = useSelector((state) => selectNoteById(state, noteId));
     const [theme] = useTheme();
     const [state, dispatch] = useReducer(reducer, {
@@ -54,66 +56,82 @@ const Note = ({ noteId }) => {
         updatedComment: note.comment,
     });
 
-    return (
-        <div className={noteStyles.container}>
-            <NoteFavoriteButton isFavorite={note.isFavorite} noteId={note.id} />
-            <VerticalDivider />
-            {state.isEditing ? (
-                <TextInput
-                    value={state.updatedTitle}
-                    setValue={(value) =>
-                        dispatch({ type: "title", payload: value })
-                    }
-                    backgroundColor={theme.neutral5}
+    const show =
+        (note.isCertain || isUncertain) && !(note.isCertain && isUncertain);
+
+    return show ? (
+        <>
+            <div
+                className={noteStyles.container}
+                style={{
+                    backgroundColor: note.isCurrent
+                        ? colors.static.primaryBlue10
+                        : "transparent",
+                }}>
+                <NoteFavoriteButton
+                    isFavorite={note.isFavorite}
+                    noteId={note.id}
                 />
-            ) : (
-                <NoteText text={note.title} />
-            )}
-            <VerticalDivider />
-            {state.isEditing ? (
-                <TextInput
-                    value={state.updatedComment}
-                    setValue={(value) =>
-                        dispatch({ type: "comment", payload: value })
-                    }
-                    backgroundColor={theme.neutral5}
-                />
-            ) : (
-                <NoteText text={note.comment} />
-            )}
-            <VerticalDivider />
-            {state.isEditing ? (
-                <NoteEditButtons
-                    noteId={noteId}
-                    onCancelClick={() =>
-                        dispatch({
-                            type: "cancel",
-                            payload: {
-                                oldTitle: note.title,
-                                oldComment: note.comment,
-                            },
-                        })
-                    }
-                    onUndoClick={() =>
-                        dispatch({
-                            type: "undo",
-                            payload: {
-                                oldTitle: note.title,
-                                oldComment: note.comment,
-                            },
-                        })
-                    }
-                    onConfirmClick={() => dispatch({ type: "confirm" })}
-                    state={state}
-                />
-            ) : (
-                <NoteButtons
-                    noteId={noteId}
-                    onEditClick={() => dispatch({ type: "edit" })}
-                />
-            )}
-        </div>
-    );
+                <VerticalDivider />
+                {state.isEditing ? (
+                    <TextInput
+                        value={state.updatedTitle}
+                        setValue={(value) =>
+                            dispatch({ type: "title", payload: value })
+                        }
+                        backgroundColor={theme.neutral5}
+                    />
+                ) : (
+                    <NoteText text={note.title} />
+                )}
+                <VerticalDivider />
+                {state.isEditing ? (
+                    <TextInput
+                        value={state.updatedComment}
+                        setValue={(value) =>
+                            dispatch({ type: "comment", payload: value })
+                        }
+                        backgroundColor={theme.neutral5}
+                    />
+                ) : (
+                    <NoteText text={note.comment} />
+                )}
+                <VerticalDivider />
+                {state.isEditing ? (
+                    <NoteEditButtons
+                        noteId={noteId}
+                        onCancelClick={() =>
+                            dispatch({
+                                type: "cancel",
+                                payload: {
+                                    oldTitle: note.title,
+                                    oldComment: note.comment,
+                                },
+                            })
+                        }
+                        onUndoClick={() =>
+                            dispatch({
+                                type: "undo",
+                                payload: {
+                                    oldTitle: note.title,
+                                    oldComment: note.comment,
+                                },
+                            })
+                        }
+                        onConfirmClick={() => dispatch({ type: "confirm" })}
+                        state={state}
+                    />
+                ) : (
+                    <NoteButtons
+                        noteId={noteId}
+                        onEditClick={() => dispatch({ type: "edit" })}
+                        isUncertain={isUncertain}
+                    />
+                )}
+            </div>
+            <Divider />
+        </>
+    ) : null;
 };
 
 export default Note;
