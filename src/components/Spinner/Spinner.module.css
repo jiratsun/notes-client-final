@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    padding-block: 3.2rem 8px;
+    width: 100%;
+    height: 100%;
+    transition: opacity 200ms;
+}
+
+.spinner {
+    transform-origin: center;
+    animation: rotate 1600ms ease infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    75% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
