@@ -1,0 +1,9 @@
+.header {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8rem;
+    transition: height 200ms;
+    position: absolute;
+    width: 100%;
+}
