@@ -2,3 +2,9 @@
     position: relative;
     border-radius: 8px;
 }
+
+.bar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}

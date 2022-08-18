@@ -39,10 +39,12 @@ const NoteWindow = ({ status }) => {
                     sortUp={sortUp}
                 />
             )}
-            <ScrollProgressBar
-                color={isUncertain ? "Yellow" : "Green"}
-                scrollPercentage={scroll}
-            />
+            <div className={noteWindowStyles.bar}>
+                <ScrollProgressBar
+                    color={isUncertain ? "Yellow" : "Green"}
+                    scrollPercentage={scroll}
+                />
+            </div>
         </div>
     );
 };
