@@ -1,0 +1,13 @@
+.btn {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+}
+
+.icon {
+    font-size: 0.8em;
+}
