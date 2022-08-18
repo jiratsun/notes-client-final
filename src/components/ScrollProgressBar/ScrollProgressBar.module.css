@@ -1,0 +1,10 @@
+.bar {
+    position: relative;
+    min-height: 8px;
+}
+
+.progress {
+    position: absolute;
+    left: 0;
+    min-height: 8px;
+}
