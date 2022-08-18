@@ -10,7 +10,7 @@ const ScrollProgressBar = ({ color, scrollPercentage }) => {
         <div
             className={scrollProgressBarStyles.bar}
             style={{
-                backgroundColor: theme.neutral10,
+                backgroundColor: theme.scroll,
             }}>
             <div
                 className={scrollProgressBarStyles.progress}
