@@ -1,7 +1,8 @@
 .container {
     display: grid;
-    grid-template-columns: 0.038fr 0.001fr 0.398fr 0.001fr 0.398fr 0.001fr 0.164fr;
-    /* grid-template-columns: 32px 338px 338px 140px; */
+    grid-template-columns: repeat(2, min-content) repeat(2, 0.5fr min-content) auto;
     gap: 0.4rem;
-    padding-inline: 0.4rem;
+    padding-inline: 0.8rem;
+    padding-block: 4px;
+    align-items: center;
 }
