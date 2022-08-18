@@ -1,6 +1,6 @@
 const staticYellow = "#E2C044";
 const staticBlue = "#3C91E6";
-const staticGreen = "#E2C044";
+const staticGreen = "#4BB084";
 const lightNeutral = "#373325";
 const darkNeutral = "#FFFFFF";
 
