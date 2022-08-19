@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 
 import Divider from "../../../components/Divider";
@@ -6,7 +6,7 @@ import Note from "../Note";
 
 import colors from "../../themes/colors";
 import notesListStyles from "./NotesList.module.css";
-import { selectNoteIds, selectNoteStatus } from "../notesSlice";
+import { selectNoteIdsByStatus, selectNoteStatus } from "../notesSlice";
 import Spinner from "../../../components/Spinner";
 
 const onScroll = (setScroll) => {
@@ -19,18 +19,21 @@ const onScroll = (setScroll) => {
     setScroll((top / outOfView) * 100);
 };
 
-const NotesList = ({ setScroll, isUncertain, sortUp }) => {
-    const noteIds = useSelector(selectNoteIds);
+const NotesList = ({ setScroll, sortUp, status }) => {
+    const selectNoteIds = useCallback(selectNoteIdsByStatus, []);
+    const noteIds = useSelector((state) => selectNoteIds(state, status));
     const sortedIds = sortUp ? [...noteIds].reverse() : [...noteIds];
     const noteStatus = useSelector(selectNoteStatus);
-
-    const color = isUncertain ? "Yellow" : "Green";
 
     return (
         <>
             <Spinner
                 hide={noteStatus === "fulfilled"}
-                color={colors.static[`primary${color}100`]}
+                color={
+                    colors.static[
+                        `primary${status === "Certain" ? "Green" : "Yellow"}100`
+                    ]
+                }
             />
             {noteStatus === "fulfilled" && (
                 <ul
@@ -41,7 +44,7 @@ const NotesList = ({ setScroll, isUncertain, sortUp }) => {
                     </li>
                     {sortedIds.map((noteId) => (
                         <li key={noteId}>
-                            <Note noteId={noteId} isUncertain={isUncertain} />
+                            <Note noteId={noteId} />
                         </li>
                     ))}
                 </ul>

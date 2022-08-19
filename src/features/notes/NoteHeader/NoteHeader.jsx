@@ -4,9 +4,7 @@ import noteHeaderStyles from "./NoteHeader.module.css";
 import colors from "../../themes/colors";
 import NoteSortButton from "../NoteSortButton";
 
-const NoteHeader = ({ isUncertain, sortUp, setSortUp, hide }) => {
-    const color = isUncertain ? "Yellow" : "Green";
-
+const NoteHeader = ({ status, sortUp, setSortUp, hide, color }) => {
     return (
         <div
             className={noteHeaderStyles.header}
@@ -18,7 +16,7 @@ const NoteHeader = ({ isUncertain, sortUp, setSortUp, hide }) => {
             <h2
                 className={`${hide ? "fs-400" : "fs-600"}`}
                 style={{ color: colors.dark.neutral100 }}>
-                {isUncertain ? "Uncertain" : "Certain"}
+                {status}
             </h2>
             {!hide && <NoteSortButton sortUp={sortUp} setSortUp={setSortUp} />}
         </div>

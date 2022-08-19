@@ -47,7 +47,7 @@ const reducer = (state, { type, payload }) => {
     }
 };
 
-const Note = ({ noteId, isUncertain }) => {
+const Note = ({ noteId }) => {
     const note = useSelector((state) => selectNoteById(state, noteId));
     const [theme] = useTheme();
     const [state, dispatch] = useReducer(reducer, {
@@ -56,10 +56,7 @@ const Note = ({ noteId, isUncertain }) => {
         updatedComment: note.comment,
     });
 
-    const show =
-        (note.isCertain || isUncertain) && !(note.isCertain && isUncertain);
-
-    return show ? (
+    return (
         <>
             <div
                 className={noteStyles.container}
@@ -125,13 +122,13 @@ const Note = ({ noteId, isUncertain }) => {
                     <NoteButtons
                         noteId={noteId}
                         onEditClick={() => dispatch({ type: "edit" })}
-                        isUncertain={isUncertain}
+                        isCertain={note.isCertain}
                     />
                 )}
             </div>
             <Divider />
         </>
-    ) : null;
+    );
 };
 
 export default Note;

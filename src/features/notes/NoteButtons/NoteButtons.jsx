@@ -12,7 +12,7 @@ const onUpdateClick = (dispatch, collectionName, noteId, update) => {
     dispatch(editNote({ collectionName, noteId, update }));
 };
 
-const NoteButtons = ({ noteId, onEditClick, isUncertain }) => {
+const NoteButtons = ({ noteId, onEditClick, isCertain }) => {
     const dispatch = useDispatch();
 
     return (
@@ -26,16 +26,14 @@ const NoteButtons = ({ noteId, onEditClick, isUncertain }) => {
             />
             <IconButton
                 size="1.6rem"
-                icon={`bi bi-bookmark-${isUncertain ? "plus" : "dash"}`}
+                icon={`bi bi-bookmark-${isCertain ? "dash" : "plus"}`}
                 iconColor={colors.dark.neutral100}
                 backgroundColor={
-                    colors.static[
-                        `primary${isUncertain ? "Green" : "Yellow"}100`
-                    ]
+                    colors.static[`primary${isCertain ? "Yellow" : "Green"}100`]
                 }
                 onClick={() =>
                     onUpdateClick(dispatch, "test0", noteId, {
-                        isCertain: isUncertain,
+                        isCertain: !isCertain,
                     })
                 }
             />

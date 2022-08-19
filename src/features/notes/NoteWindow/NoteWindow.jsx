@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ScrollProgressBar from "../../../components/ScrollProgressBar";
 import NoteHeader from "../NoteHeader";
 import NotesList from "../NotesList";
+import CurrentNotesList from "../CurrentNotesList/CurrentNotesList";
 
 import noteWindowStyles from "./NoteWindow.module.css";
 import useTheme from "../../themes/useTheme";
@@ -18,32 +19,44 @@ const NoteWindow = ({ status }) => {
     }, [scroll]);
 
     const scrollChange = scroll - prevScroll.current;
-    const isUncertain = status === "uncertain";
+
+    let color;
+    switch (status) {
+        case "Certain":
+            color = "Green";
+            break;
+        case "Uncertain":
+            color = "Yellow";
+            break;
+        case "Current":
+            color = "Blue";
+            break;
+        default:
+            break;
+    }
 
     return (
         <div
             className={noteWindowStyles.container}
             style={{ backgroundColor: theme.neutral5 }}>
             <NoteHeader
-                isUncertain={isUncertain}
+                status={status}
                 sortUp={sortUp}
                 setSortUp={setSortUp}
                 hide={scrollChange > 0}
+                color={color}
             />
-            {status === "current" ? (
-                <></>
+            {status === "Current" ? (
+                <CurrentNotesList setScroll={setScroll} sortUp={sortUp} />
             ) : (
                 <NotesList
                     setScroll={setScroll}
-                    isUncertain={isUncertain}
                     sortUp={sortUp}
+                    status={status}
                 />
             )}
             <div className={noteWindowStyles.bar}>
-                <ScrollProgressBar
-                    color={isUncertain ? "Yellow" : "Green"}
-                    scrollPercentage={scroll}
-                />
+                <ScrollProgressBar color={color} scrollPercentage={scroll} />
             </div>
         </div>
     );
