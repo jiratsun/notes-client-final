@@ -26,7 +26,7 @@ const NoteText = ({ text }) => {
             </p>
             <i
                 className={`${
-                    copy ? "bi bi-clipboard-check" : "bi bi-clipboard"
+                    copy ? "bi bi-clipboard-fill" : "bi bi-clipboard"
                 } ${noteTextStyles.icon}`}
                 style={{ color: theme.neutral50 }}
             />
