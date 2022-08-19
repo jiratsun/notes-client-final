@@ -1,6 +1,7 @@
 import {
     createAsyncThunk,
     createEntityAdapter,
+    createSelector,
     createSlice,
 } from "@reduxjs/toolkit";
 
@@ -75,5 +76,22 @@ export const {
 
 export const selectNoteStatus = (state) => state.notes.status;
 export const selectNoteError = (state) => state.notes.error;
+
+export const selectNoteIdsByStatus = createSelector(
+    [selectAllNotes, (_, status) => status],
+    (notes, status) => {
+        const filteredNotes = notes.filter((note) =>
+            status === "Certain" ? note.isCertain : !note.isCertain
+        );
+        return filteredNotes.map((note) => note.id);
+    }
+);
+
+export const selectCurrentNoteIds = createSelector(selectAllNotes, (notes) => {
+    const sortedCurrentNotes = notes
+        .filter((note) => note.currentDate)
+        .sort((a, b) => -a.currentDate.localeCompare(b.currentDate));
+    return sortedCurrentNotes.map((note) => note.id);
+});
 
 export default notesSlice.reducer;
