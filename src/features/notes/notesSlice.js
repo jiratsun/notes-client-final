@@ -7,7 +7,9 @@ import {
 
 import server from "../../apis/server";
 
-const notesAdapter = createEntityAdapter();
+const notesAdapter = createEntityAdapter({
+    sortComparer: (a, b) => -a.insertDate.localeCompare(b.insertDate),
+});
 
 const initialState = notesAdapter.getInitialState({
     status: "idle",
@@ -103,7 +105,7 @@ export const selectNoteIdsByStatus = createSelector(
 export const selectCurrentNoteIds = createSelector(selectAllNotes, (notes) => {
     const sortedCurrentNotes = notes
         .filter((note) => note.currentDate)
-        .sort((a, b) => -a.currentDate.localeCompare(b.currentDate));
+        .sort((a, b) => a.currentDate.localeCompare(b.currentDate));
     return sortedCurrentNotes.map((note) => note.id);
 });
 
