@@ -1,21 +1,17 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import Divider from "../../../components/Divider";
 import Note from "../Note";
+import Spinner from "../../../components/Spinner";
 
 import colors from "../../themes/colors";
 import notesListStyles from "./NotesList.module.css";
 import { selectNoteIdsByStatus, selectNoteStatus } from "../notesSlice";
-import Spinner from "../../../components/Spinner";
 
-const onScroll = (setScroll) => {
-    const top = document.querySelector(
-        `.${notesListStyles.container}`
-    ).scrollTop;
-    const outOfView =
-        document.querySelector(`.${notesListStyles.container}`).scrollHeight -
-        document.querySelector(`.${notesListStyles.container}`).clientHeight;
+const onScroll = (setScroll, { current }) => {
+    const top = current.scrollTop;
+    const outOfView = current.scrollHeight - current.clientHeight;
     setScroll((top / outOfView) * 100);
 };
 
@@ -24,6 +20,7 @@ const NotesList = ({ setScroll, sortUp, status }) => {
     const noteIds = useSelector((state) => selectNoteIds(state, status));
     const sortedIds = sortUp ? [...noteIds].reverse() : [...noteIds];
     const noteStatus = useSelector(selectNoteStatus);
+    const listRef = useRef();
 
     return (
         <>
@@ -38,7 +35,8 @@ const NotesList = ({ setScroll, sortUp, status }) => {
             {noteStatus === "fulfilled" && (
                 <ul
                     className={notesListStyles.container}
-                    onScroll={() => onScroll(setScroll)}>
+                    onScroll={() => onScroll(setScroll, listRef)}
+                    ref={listRef}>
                     <li>
                         <Divider />
                     </li>
