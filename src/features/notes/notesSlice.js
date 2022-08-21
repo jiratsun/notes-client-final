@@ -109,4 +109,9 @@ export const selectCurrentNoteIds = createSelector(selectAllNotes, (notes) => {
     return sortedCurrentNotes.map((note) => note.id);
 });
 
+export const selectTitles = createSelector(
+    selectAllNotes,
+    (notes) => new Set(notes.map((note) => note.title))
+);
+
 export default notesSlice.reducer;
