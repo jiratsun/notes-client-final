@@ -1,15 +1,22 @@
 import React from "react";
-import useTheme from "../../features/themes/useTheme";
 
 import verticalDividerStyles from "./VerticalDivider.module.css";
 
-const VerticalDivider = () => {
-    const [theme] = useTheme();
+const VerticalDivider = ({ height, width, color }) => {
     return (
         <div
             className={verticalDividerStyles.divider}
-            style={{ backgroundColor: theme.neutral25 }}></div>
+            style={{
+                backgroundColor: color,
+                height,
+                width,
+            }}></div>
     );
+};
+
+VerticalDivider.defaultProps = {
+    height: "16px",
+    width: "2px",
 };
 
 export default VerticalDivider;
