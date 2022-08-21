@@ -1,0 +1,11 @@
+.container {
+    display: grid;
+    gap: 0.4rem;
+    grid-template-columns: 1fr min-content;
+    grid-area: Add;
+}
+
+.btn {
+    border-radius: 8px;
+    padding-inline: 0.8rem;
+}
