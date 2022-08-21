@@ -1,0 +1,9 @@
+.container {
+    display: grid;
+    grid-template-columns: 0.45fr min-content 0.55fr min-content min-content;
+    gap: 0.4rem;
+    padding-inline: 0.8rem;
+    padding-block: 4px;
+    align-items: center;
+    position: relative;
+}
