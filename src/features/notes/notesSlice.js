@@ -42,6 +42,16 @@ export const removeNote = createAsyncThunk(
     }
 );
 
+export const createNote = createAsyncThunk(
+    "notes/createNote",
+    async ({ collectionName, note }) => {
+        const { data } = await server.post("/notes", note, {
+            params: { collectionName },
+        });
+        return data;
+    }
+);
+
 export const notesSlice = createSlice({
     name: "notes",
     initialState,
@@ -64,6 +74,9 @@ export const notesSlice = createSlice({
             })
             .addCase(removeNote.fulfilled, (state, action) => {
                 notesAdapter.removeOne(state, action.payload);
+            })
+            .addCase(createNote.fulfilled, (state, action) => {
+                notesAdapter.addOne(state, action.payload);
             });
     },
 });
