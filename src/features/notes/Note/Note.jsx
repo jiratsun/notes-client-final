@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import { useSelector } from "react-redux";
 
 import TextInput from "../../../components/TextInput";
@@ -13,6 +13,7 @@ import { selectNoteById } from "../notesSlice";
 import noteStyles from "./Note.module.css";
 import useTheme from "../../themes/useTheme";
 import VerticalDivider from "../../../components/VerticalDivider";
+import NoteTooltip from "../NoteTooltip";
 
 const reducer = (state, { type, payload }) => {
     switch (type) {
@@ -47,8 +48,19 @@ const reducer = (state, { type, payload }) => {
     }
 };
 
+const onMouseEnter = (setHover, setShow) => {
+    setHover(setTimeout(() => setShow(true), 2000));
+};
+
+const onMouseLeave = (hover, setShow) => {
+    clearTimeout(hover);
+    setShow(false);
+};
+
 const Note = ({ noteId }) => {
     const note = useSelector((state) => selectNoteById(state, noteId));
+    const [hover, setHover] = useState(null);
+    const [showTooltip, setShowTooltip] = useState(false);
     const [theme] = useTheme();
     const [state, dispatch] = useReducer(reducer, {
         isEditing: false,
@@ -64,12 +76,14 @@ const Note = ({ noteId }) => {
                     backgroundColor: note.isCurrent
                         ? colors.static.primaryBlue10
                         : "transparent",
-                }}>
+                }}
+                onMouseEnter={() => onMouseEnter(setHover, setShowTooltip)}
+                onMouseLeave={() => onMouseLeave(hover, setShowTooltip)}>
                 <NoteFavoriteButton
                     isFavorite={note.isFavorite}
                     noteId={note.id}
                 />
-                <VerticalDivider />
+                <VerticalDivider color={theme.neutral25} />
                 {state.isEditing ? (
                     <TextInput
                         value={state.updatedTitle}
@@ -81,7 +95,7 @@ const Note = ({ noteId }) => {
                 ) : (
                     <NoteText text={note.title} />
                 )}
-                <VerticalDivider />
+                <VerticalDivider color={theme.neutral25} />
                 {state.isEditing ? (
                     <TextInput
                         value={state.updatedComment}
@@ -93,7 +107,7 @@ const Note = ({ noteId }) => {
                 ) : (
                     <NoteText text={note.comment} />
                 )}
-                <VerticalDivider />
+                <VerticalDivider color={theme.neutral25} />
                 {state.isEditing ? (
                     <NoteEditButtons
                         noteId={noteId}
@@ -125,6 +139,20 @@ const Note = ({ noteId }) => {
                         isCertain={note.isCertain}
                     />
                 )}
+                <NoteTooltip
+                    show={showTooltip}
+                    info={{
+                        "Edit Date": new Date(note.editDate).toLocaleString(),
+                        "Insert Date": new Date(
+                            note.insertDate
+                        ).toLocaleString(),
+                    }}
+                    backgroundColor={
+                        note.isCertain
+                            ? colors.static.primaryGreen100
+                            : colors.static.primaryYellow100
+                    }
+                />
             </div>
             <Divider />
         </>

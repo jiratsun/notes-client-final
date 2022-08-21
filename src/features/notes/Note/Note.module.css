@@ -5,4 +5,5 @@
     padding-inline: 0.8rem;
     padding-block: 4px;
     align-items: center;
+    position: relative;
 }
