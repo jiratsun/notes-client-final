@@ -250,7 +250,22 @@ html {
 
 /* MEDIA QUERIES */
 
-@media (min-width: 720px) {
+@media (min-width: 428px) {
+    :root {
+        --fs-900: 1.8rem;
+        --fs-800: 1.6rem;
+        --fs-700: 1.4rem;
+        --fs-600: 1.25rem;
+        --fs-500: 1.1rem;
+        --fs-400: 1rem;
+        --fs-300: 0.9rem;
+        --fs-200: 0.8rem;
+
+        --fs-base: 1.125em;
+    }
+}
+
+@media (min-width: 1366px) {
     :root {
         --fs-900: 1.8rem;
         --fs-800: 1.6rem;

@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import colors from "../../themes/colors";
 import noteFavoriteButtonStyles from "./NoteFavoriteButton.module.css";
 import { editNote } from "../notesSlice";
+import useTheme from "../../themes/useTheme";
 
 const onClick = (dispatch, collectionName, noteId, update) => {
     dispatch(editNote({ collectionName, noteId, update }));
 };
 
 const NoteFavoriteButton = ({ isFavorite, noteId }) => {
+    const [theme] = useTheme();
     const dispatch = useDispatch();
 
     return (
@@ -25,7 +26,7 @@ const NoteFavoriteButton = ({ isFavorite, noteId }) => {
                         : "bi bi-bookmark-star"
                 } ${noteFavoriteButtonStyles.icon}`}
                 style={{
-                    color: colors.light.neutral100,
+                    color: theme.neutral100,
                 }}
             />
         </button>
