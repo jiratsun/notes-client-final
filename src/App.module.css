@@ -1,0 +1,95 @@
+.app {
+    display: grid;
+    gap: 0.8rem;
+    grid-auto-columns: 1fr;
+    height: 100vh;
+    padding: 0.8rem;
+    grid-template-rows: min-content repeat(24, 1fr);
+}
+
+.Certain {
+    grid-template-areas:
+        "Header Header"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Uncertain"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Certain Current"
+        "Add Current"
+        "Add Current"
+        "Add Current";
+}
+
+.Uncertain {
+    grid-template-areas:
+        "Header Header"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Certain"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Uncertain Current"
+        "Add Current"
+        "Add Current"
+        "Add Current";
+}
+
+.Current {
+    grid-template-areas:
+        "Header Header"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Certain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Current Uncertain"
+        "Add Uncertain"
+        "Add Uncertain"
+        "Add Uncertain";
+}

@@ -7,7 +7,10 @@ const NoteSortButton = ({ sortUp, setSortUp }) => {
     return (
         <button
             className={noteSortButtonStyles.btn}
-            onClick={() => setSortUp((prev) => !prev)}>
+            onClick={(e) => {
+                e.stopPropagation();
+                setSortUp((prev) => !prev);
+            }}>
             <i
                 className={`${sortUp ? "bi bi-sort-up" : "bi bi-sort-down"} ${
                     noteSortButtonStyles.icon

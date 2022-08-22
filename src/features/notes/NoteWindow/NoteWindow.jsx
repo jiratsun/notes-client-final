@@ -38,7 +38,7 @@ const NoteWindow = ({ status }) => {
     return (
         <div
             className={noteWindowStyles.container}
-            style={{ backgroundColor: theme.neutral5 }}>
+            style={{ backgroundColor: theme.neutral5, gridArea: status }}>
             <NoteHeader
                 status={status}
                 sortUp={sortUp}

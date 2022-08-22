@@ -14,6 +14,7 @@ const notesAdapter = createEntityAdapter({
 const initialState = notesAdapter.getInitialState({
     status: "idle",
     error: null,
+    main: "Certain",
 });
 
 export const fetchNotes = createAsyncThunk(
@@ -57,7 +58,12 @@ export const createNote = createAsyncThunk(
 export const notesSlice = createSlice({
     name: "notes",
     initialState,
-    reducers: {},
+    reducers: {
+        swapMain(state, action) {
+            const status = action.payload;
+            state.main = status;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchNotes.pending, (state, _) => {
@@ -83,6 +89,8 @@ export const notesSlice = createSlice({
     },
 });
 
+export const { swapMain } = notesSlice.actions;
+
 export const {
     selectAll: selectAllNotes,
     selectById: selectNoteById,
@@ -91,6 +99,7 @@ export const {
 
 export const selectNoteStatus = (state) => state.notes.status;
 export const selectNoteError = (state) => state.notes.error;
+export const selectMain = (state) => state.notes.main;
 
 export const selectNoteIdsByStatus = createSelector(
     [selectAllNotes, (_, status) => status],
