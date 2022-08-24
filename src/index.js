@@ -6,8 +6,11 @@ import { store } from "./app/store";
 import App from "./App";
 
 import "./styles.css";
+import { fetchPages } from "./features/pages/pagesSlice";
 
 const root = createRoot(document.getElementById("root"));
+
+store.dispatch(fetchPages());
 
 root.render(
     <React.StrictMode>
