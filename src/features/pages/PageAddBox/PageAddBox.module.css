@@ -1,0 +1,8 @@
+.container {
+    display: grid;
+    align-items: center;
+    gap: 0.8rem;
+    grid-template-columns: 1fr min-content;
+    padding: 0.8rem;
+    z-index: 1;
+}
