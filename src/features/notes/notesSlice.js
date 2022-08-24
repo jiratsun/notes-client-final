@@ -100,6 +100,9 @@ export const {
 export const selectNoteStatus = (state) => state.notes.status;
 export const selectNoteError = (state) => state.notes.error;
 export const selectMain = (state) => state.notes.main;
+export const selectNumberOfNotes = (state) => state.notes.ids.length;
+export const selectLatestDate = (state) =>
+    state.notes.entities[state.notes.ids[0]]?.insertDate;
 
 export const selectNoteIdsByStatus = createSelector(
     [selectAllNotes, (_, status) => status],

@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: Header;
+    gap: 2.4rem;
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+}
+
+.btn:hover {
+    opacity: 0.65;
+}
