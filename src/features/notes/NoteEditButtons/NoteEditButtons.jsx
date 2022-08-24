@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import IconButton from "../../../components/IconButton";
 
 import { editNote } from "../notesSlice";
 import colors from "../../themes/colors";
 import noteEditButtonsStyles from "./NoteEditButtons.module.css";
+import { selectCurrentCollection } from "../../pages/pagesSlice";
 
 const onEditConfirmClick = (
     dispatch,
@@ -26,6 +27,7 @@ const NoteEditButtons = ({
     state: { updatedTitle, updatedComment },
 }) => {
     const dispatch = useDispatch();
+    const currentCollection = useSelector(selectCurrentCollection);
 
     return (
         <div className={noteEditButtonsStyles.container}>
@@ -51,7 +53,7 @@ const NoteEditButtons = ({
                 onClick={() =>
                     onEditConfirmClick(
                         dispatch,
-                        "test0",
+                        currentCollection,
                         noteId,
                         {
                             title: updatedTitle,

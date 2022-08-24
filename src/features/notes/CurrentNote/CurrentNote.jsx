@@ -5,14 +5,15 @@ import TextInput from "../../../components/TextInput";
 import NoteText from "../NoteText";
 import Divider from "../../../components/Divider";
 import VerticalDivider from "../../../components/VerticalDivider";
+import IconButton from "../../../components/IconButton";
+import NoteTooltip from "../NoteTooltip";
 
 import colors from "../../themes/colors";
 import { editNote, selectNoteById } from "../notesSlice";
 import currentNoteStyles from "./CurrentNote.module.css";
 import useTheme from "../../themes/useTheme";
 import useDebounce from "../../../hooks/useDebounce";
-import IconButton from "../../../components/IconButton";
-import NoteTooltip from "../NoteTooltip";
+import { selectCurrentCollection } from "../../pages/pagesSlice";
 
 const complete = (dispatch, collectionName, noteId) => {
     dispatch(
@@ -45,15 +46,18 @@ const onMouseLeave = (hover, setShow) => {
 
 const CurrentNote = ({ noteId }) => {
     const note = useSelector((state) => selectNoteById(state, noteId));
+    const currentCollection = useSelector(selectCurrentCollection);
     const [currentComment, setCurrentComment] = useState(note.currentComment);
     const [hover, setHover] = useState(null);
     const [showTooltip, setShowTooltip] = useState(false);
     const [theme] = useTheme();
     const dispatch = useDispatch();
 
-    useDebounce(() => edit(dispatch, "test0", noteId, currentComment), 1500, [
-        currentComment,
-    ]);
+    useDebounce(
+        () => edit(dispatch, currentCollection, noteId, currentComment),
+        1500,
+        [currentComment]
+    );
 
     return (
         <>
@@ -79,7 +83,9 @@ const CurrentNote = ({ noteId }) => {
                     icon="bi bi-check-lg"
                     iconColor={colors.dark.neutral100}
                     backgroundColor={colors.static.primaryGreen100}
-                    onClick={() => complete(dispatch, "test0", noteId)}
+                    onClick={() =>
+                        complete(dispatch, currentCollection, noteId)
+                    }
                 />
                 <NoteTooltip
                     show={showTooltip}

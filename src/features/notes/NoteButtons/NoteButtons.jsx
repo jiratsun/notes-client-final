@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import IconButton from "../../../components/IconButton";
 import NoteDeleteButton from "../NoteDeleteButton";
@@ -7,6 +7,7 @@ import NoteDeleteButton from "../NoteDeleteButton";
 import { editNote } from "../notesSlice";
 import colors from "../../themes/colors";
 import noteButtonsStyles from "./NoteButtons.module.css";
+import { selectCurrentCollection } from "../../pages/pagesSlice";
 
 const onUpdateClick = (dispatch, collectionName, noteId, update) => {
     dispatch(editNote({ collectionName, noteId, update }));
@@ -14,6 +15,7 @@ const onUpdateClick = (dispatch, collectionName, noteId, update) => {
 
 const NoteButtons = ({ noteId, onEditClick, isCertain }) => {
     const dispatch = useDispatch();
+    const currentCollection = useSelector(selectCurrentCollection);
 
     return (
         <div className={noteButtonsStyles.container}>
@@ -32,7 +34,7 @@ const NoteButtons = ({ noteId, onEditClick, isCertain }) => {
                     colors.static[`primary${isCertain ? "Yellow" : "Green"}100`]
                 }
                 onClick={() =>
-                    onUpdateClick(dispatch, "test0", noteId, {
+                    onUpdateClick(dispatch, currentCollection, noteId, {
                         isCertain: !isCertain,
                     })
                 }
@@ -43,7 +45,7 @@ const NoteButtons = ({ noteId, onEditClick, isCertain }) => {
                 iconColor={colors.dark.neutral100}
                 backgroundColor={colors.static.primaryBlue100}
                 onClick={() =>
-                    onUpdateClick(dispatch, "test0", noteId, {
+                    onUpdateClick(dispatch, currentCollection, noteId, {
                         isCurrent: true,
                         currentDate: new Date(),
                     })

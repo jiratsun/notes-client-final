@@ -6,6 +6,7 @@ import NoteInput from "../NoteInput/NoteInput";
 import colors from "../../themes/colors";
 import noteAddBoxStyles from "./NoteAddBox.module.css";
 import { createNote, selectTitles } from "../notesSlice";
+import { selectCurrentCollection } from "../../pages/pagesSlice";
 
 const create = (dispatch, collectionName, note, setTitle, setComment) => {
     dispatch(createNote({ collectionName, note }));
@@ -15,6 +16,7 @@ const create = (dispatch, collectionName, note, setTitle, setComment) => {
 
 const NoteAddBox = () => {
     const titles = useSelector(selectTitles);
+    const currentCollection = useSelector(selectCurrentCollection);
     const [error, setError] = useState(null);
     const [title, setTitle] = useState("");
     const [comment, setComment] = useState("");
@@ -38,12 +40,12 @@ const NoteAddBox = () => {
                     color: colors.dark.neutral100,
                 }}
                 onClick={() => {
-                    if (titles.has(title)) setError("Title Duplicated");
+                    if (titles.has(title.trim())) setError("Title Duplicated");
                     else if (title === "") setError("Title Required");
                     else
                         create(
                             dispatch,
-                            "test0",
+                            currentCollection,
                             {
                                 title: title.trim(),
                                 comment: comment.trim(),
@@ -68,7 +70,7 @@ const NoteAddBox = () => {
                     else
                         create(
                             dispatch,
-                            "test0",
+                            currentCollection,
                             {
                                 title: title.trim(),
                                 comment: comment.trim(),

@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import noteFavoriteButtonStyles from "./NoteFavoriteButton.module.css";
 import { editNote } from "../notesSlice";
 import useTheme from "../../themes/useTheme";
+import { selectCurrentCollection } from "../../pages/pagesSlice";
 
 const onClick = (dispatch, collectionName, noteId, update) => {
     dispatch(editNote({ collectionName, noteId, update }));
@@ -12,12 +13,15 @@ const onClick = (dispatch, collectionName, noteId, update) => {
 const NoteFavoriteButton = ({ isFavorite, noteId }) => {
     const [theme] = useTheme();
     const dispatch = useDispatch();
+    const currentCollection = useSelector(selectCurrentCollection);
 
     return (
         <button
             className={noteFavoriteButtonStyles.btn}
             onClick={() =>
-                onClick(dispatch, "test0", noteId, { isFavorite: !isFavorite })
+                onClick(dispatch, currentCollection, noteId, {
+                    isFavorite: !isFavorite,
+                })
             }>
             <i
                 className={`${

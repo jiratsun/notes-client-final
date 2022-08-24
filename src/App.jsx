@@ -12,18 +12,23 @@ import {
 } from "./features/notes/notesSlice";
 import appStyles from "./App.module.css";
 import useTheme from "./features/themes/useTheme";
-import { selectCurrentCollection } from "./features/pages/pagesSlice";
+import {
+    selectCurrentCollection,
+    selectPageStatus,
+} from "./features/pages/pagesSlice";
 
 const App = () => {
     const [theme] = useTheme();
     const dispatch = useDispatch();
     const noteStatus = useSelector(selectNoteStatus);
+    const pageStatus = useSelector(selectPageStatus);
     const main = useSelector(selectMain);
     const currentCollection = useSelector(selectCurrentCollection);
 
     useEffect(() => {
-        if (noteStatus === "idle") dispatch(fetchNotes("test0"));
-    }, [dispatch, noteStatus]);
+        if (noteStatus === "idle" && pageStatus === "fulfilled")
+            dispatch(fetchNotes(currentCollection));
+    }, [dispatch, noteStatus, currentCollection, pageStatus]);
 
     return (
         <div
