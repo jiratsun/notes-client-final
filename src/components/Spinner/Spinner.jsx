@@ -9,6 +9,7 @@ const Spinner = ({ hide, color }) => {
 
     useEffect(() => {
         if (hide) setTimeout(() => setVisible(false), 300);
+        else setVisible(true);
     }, [hide, setVisible]);
 
     return (

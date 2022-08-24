@@ -71,7 +71,7 @@ export const notesSlice = createSlice({
             })
             .addCase(fetchNotes.fulfilled, (state, action) => {
                 state.status = "fulfilled";
-                notesAdapter.upsertMany(state, action.payload);
+                notesAdapter.setAll(state, action.payload);
             })
             .addCase(fetchNotes.rejected, (state, action) => {
                 state.status = "rejected";
@@ -85,6 +85,9 @@ export const notesSlice = createSlice({
             })
             .addCase(createNote.fulfilled, (state, action) => {
                 notesAdapter.addOne(state, action.payload);
+            })
+            .addCase("pages/changePage", (state) => {
+                state.status = "idle";
             });
     },
 });
