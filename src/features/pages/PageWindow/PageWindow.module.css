@@ -1,0 +1,17 @@
+.container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    width: 50%;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    border-radius: 8px;
+    position: relative;
+}
