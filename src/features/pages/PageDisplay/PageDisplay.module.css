@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 8px;
+    padding: 0.2rem 0.6rem;
+}
+
+.btn {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+}
+
+.icon {
+    font-size: 0.8em;
+}
