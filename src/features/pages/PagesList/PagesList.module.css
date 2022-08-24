@@ -1,0 +1,15 @@
+.container {
+    position: relative;
+    height: 20rem;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.list {
+    padding-top: 3.2rem;
+}
